@@ -12,17 +12,16 @@ const PhotoSlider = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const { ref, inView } = useInView({
-    threshold: 0.3, 
-    triggerOnce: true, 
+    threshold: 0.3,
+    triggerOnce: true,
   });
 
   useEffect(() => {
     if (inView) {
-      setIsVisible(true); // Load the slider when it comes into view
+      setIsVisible(true);
     }
   }, [inView]);
 
-  // Automatically slide every 5 seconds
   useEffect(() => {
     if (isVisible) {
       const interval = setInterval(() => {
@@ -33,53 +32,63 @@ const PhotoSlider = () => {
   }, [isVisible, images.length]);
 
   return (
-    <div ref={ref} className="bg-[#F5F5DC] py-10 px-4 md:px-8 lg:px-12">
-      {isVisible && (
-        <>
-          {/* Container Header */}
-          <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold text-purple-800">Photo Gallery</h2>
-            <p className="text-lg text-gray-600 mt-2">
-              Explore our best memories through this slideshow
-            </p>
-          </div>
-
-          {/* Slider Section */}
-          <div className="relative bg-purple-900 overflow-hidden rounded-lg shadow-lg">
-            {/* Images Section */}
-            <div
-              className="flex transition-transform duration-500"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {images.map((image, index) => (
-                <div
-                  key={index}
-                  className="min-w-full h-[500px] flex-shrink-0 relative"
-                >
-                  <img
-                    src={image}
-                    alt={`Slide ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
+    <div
+      ref={ref}
+      className="bg-[#F5F5DC] py-6 px-4 md:py-10 md:px-8 lg:px-12 w-full"
+    >
+      {/* Hide Photo Gallery Section on Small Screens */}
+      <div className="hidden sm:block">
+        {isVisible && (
+          <>
+            {/* Container Header */}
+            <div className="text-center mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-purple-800">
+                Photo Gallery
+              </h2>
+              <p className="text-sm md:text-lg text-gray-600 mt-2">
+                Explore our best memories through this slideshow
+              </p>
             </div>
 
-            {/* Navigation Dots */}
-            <div className="absolute bottom-4 flex justify-center w-full space-x-2">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === currentIndex ? "bg-white" : "bg-gray-500"
-                  }`}
-                ></button>
-              ))}
+            {/* Slider Section */}
+            <div className="relative bg-purple-900 overflow-hidden rounded-lg shadow-lg">
+              {/* Images Section */}
+              <div
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              >
+                {images.map((image, index) => (
+                  <div
+                    key={index}
+                    className="min-w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] flex-shrink-0 relative"
+                  >
+                    <img
+                      src={image}
+                      alt={`Slide ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Navigation Dots */}
+              <div className="absolute bottom-4 flex justify-center w-full space-x-2">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`w-4 h-4 md:w-3 md:h-3 rounded-full transition-colors ${
+                      index === currentIndex
+                        ? "bg-white"
+                        : "bg-gray-400 opacity-75 hover:opacity-100"
+                    }`}
+                  ></button>
+                ))}
+              </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

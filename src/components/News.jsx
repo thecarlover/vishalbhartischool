@@ -40,14 +40,16 @@ const NewsSection = () => {
   };
 
   return (
-    <div className="bg-white py-12 px-6">
+    <div className="bg-white py-8 px-4 sm:py-12 sm:px-6">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-purple-800 mb-8">News and Events</h2>
-        <div className="relative flex items-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-purple-800 mb-6 sm:mb-8">
+          News and Events
+        </h2>
+        <div className="relative flex flex-col lg:flex-row items-center">
           {/* Left Arrow */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-md"
+            className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-md"
           >
             &#9664;
           </button>
@@ -63,20 +65,24 @@ const NewsSection = () => {
               {newsData.map((news, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-full lg:w-1/3 px-4"
+                  className="flex-shrink-0 w-full sm:w-2/3 lg:w-1/3 px-2"
                 >
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                     <img
                       src={news.image}
                       alt={news.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-40 sm:h-48 object-cover"
                     />
                     <div className="p-4">
-                      <p className="text-gray-500 text-sm mb-2">{news.date}</p>
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      <p className="text-gray-500 text-xs sm:text-sm mb-2">
+                        {news.date}
+                      </p>
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
                         {news.title}
                       </h3>
-                      <p className="text-gray-600">{news.description}</p>
+                      <p className="text-gray-600 text-sm sm:text-base">
+                        {news.description}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -87,12 +93,14 @@ const NewsSection = () => {
           {/* Right Arrow */}
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-md"
+            className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-md"
           >
             &#9654;
           </button>
         </div>
-        <button className="mt-8 px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-full shadow-md">
+
+        {/* Learn More Button */}
+        <button className="mt-6 sm:mt-8 px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-full shadow-md">
           Learn more
         </button>
       </div>
