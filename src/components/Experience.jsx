@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const Experiences = () => {
   const experiences = [
@@ -18,8 +19,7 @@ const Experiences = () => {
     },
     {
       title: "Udyaan Utsav II",
-      description:
-        "At RashtraPati Bhavan",
+      description: "At RashtraPati Bhavan",
       image:
         "https://img1.wsimg.com/isteam/ip/8bfc3ae8-6b51-422e-bd0c-84e4f6f53018/b3bb26cc-5808-4ed7-b165-f57016544231%20(2).jpg",
     },
@@ -47,9 +47,13 @@ const Experiences = () => {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {experiences.map((exp, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="min-w-full flex flex-col lg:flex-row items-center gap-8"
+                initial={{ opacity: 0, y: 100 }}  // Start below the screen with opacity 0
+                whileInView={{ opacity: 1, y: 0 }} // Animate to normal position with opacity 1
+                transition={{ duration: 0.7 }}  // Animation duration
+                viewport={{ once: true }} // Trigger the animation only once when in view
               >
                 <img
                   src={exp.image}
@@ -62,7 +66,7 @@ const Experiences = () => {
                   </h3>
                   <p className="text-gray-600">{exp.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

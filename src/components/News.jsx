@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const NewsSection = () => {
   const newsData = [
@@ -63,9 +64,13 @@ const NewsSection = () => {
               }}
             >
               {newsData.map((news, index) => (
-                <div
+                <motion.div
                   key={index}
                   className="flex-shrink-0 w-full sm:w-2/3 lg:w-1/3 px-2"
+                  initial={{ opacity: 0, x: -100 }}  // Start from left with opacity 0
+                  whileInView={{ opacity: 1, x: 0 }}  // Slide to the original position with opacity 1
+                  transition={{ duration: 0.6 }} // Control the speed of the animation
+                  viewport={{ once: true }}  // Trigger animation once when in view
                 >
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                     <img
@@ -85,7 +90,7 @@ const NewsSection = () => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

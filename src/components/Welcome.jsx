@@ -1,9 +1,9 @@
-import React from "react";
+
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const Welcome = () => {
-  // Hook to detect when the component is in view
+ 
   const [ref, inView] = useInView({
     triggerOnce: true, // Animation triggers only once
     threshold: 0.6,    // Trigger when 20% of the component is visible
